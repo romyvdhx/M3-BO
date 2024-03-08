@@ -15,9 +15,9 @@ public class AnimationTest : MonoBehaviour
     void Update()
     {
         //Press the up arrow button to reset the trigger and set another one
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("e was pressed");
+            Debug.Log("w was pressed");
             //Reset the "Crouch" trigger
             m_Animator.ResetTrigger("Idle");
 
@@ -25,9 +25,9 @@ public class AnimationTest : MonoBehaviour
             m_Animator.SetTrigger("Walk");
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.W))
         {
-            Debug.Log("r was pressed");
+            Debug.Log("w was pressed");
             //Reset the "Jump" trigger
             m_Animator.ResetTrigger("Walk");
 
