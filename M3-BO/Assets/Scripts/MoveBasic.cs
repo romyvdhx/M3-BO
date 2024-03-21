@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class MoveBasic : MonoBehaviour
 {
-    [SerializeField] private float speed = 50f;
-    [SerializeField] private float rotSpeed = 50f;
+    public float speed = 50f;
+    public float rotSpeed = 50f;
     private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,20 @@ public class MoveBasic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 positionUpdate = transform.position + Input.GetAxis("Vertical") * transform.forward * speed * Time.deltaTime;
-        transform.position = positionUpdate;
-        transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime, 0));
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.AddForce(transform.forward * speed * Time.deltaTime);
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            rb.velocity = Vector3.zero;
+        }
+        float xMove = Input.GetAxis("Horizontal");
+
+        rb.transform.Rotate(transform.up, rotSpeed * xMove * Time.deltaTime);
+        
+        //Vector3 positionUpdate = transform.position + Input.GetAxis("Vertical") * transform.forward * speed * Time.deltaTime;
+        //transform.position = positionUpdate;
+        //transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime, 0));
     }
 }
