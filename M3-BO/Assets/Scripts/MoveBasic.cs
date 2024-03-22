@@ -12,7 +12,7 @@ public class MoveBasic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -20,9 +20,14 @@ public class MoveBasic : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
+            Debug.Log("w");
             rb.AddForce(transform.forward * speed * Time.deltaTime);
         }
         if (Input.GetKeyUp(KeyCode.W))
+        {
+            rb.velocity = Vector3.zero;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
         {
             rb.velocity = Vector3.zero;
         }
