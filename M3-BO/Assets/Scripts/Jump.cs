@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchCube : MonoBehaviour
+public class Jump : MonoBehaviour
 {
     Rigidbody m_Rigidbody;
-    public float m_Thrust = 20f;
+    public float force = 20f;
+    public bool grounded = false;
+    public bool onFloor = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,11 +23,21 @@ public class LaunchCube : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onFloor == true)
         {
             Debug.Log("space");
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
-            m_Rigidbody.AddForce(transform.up * m_Thrust);
+            m_Rigidbody.AddForce(transform.up * force);
+            grounded = false;
+            onFloor = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            onFloor = true;
         }
     }
 }

@@ -20,7 +20,7 @@ public class MoveBasic : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log("w");
+            //Debug.Log("w");
             rb.AddForce(transform.forward * speed * Time.deltaTime);
         }
         if (Input.GetKeyUp(KeyCode.W))
